@@ -35,15 +35,8 @@
 #include "wifi_config.h"
 #include "gpio_config.h"
 #include "spiffs_config.h"
-#include "my_tcpip.h"
 
 
-extern SemaphoreHandle_t xRecvPassWifi;
-extern SemaphoreHandle_t xTryConnectWifi;
-
-extern QueueHandle_t xBuffLoadf;
-
-extern QueueHandle_t xBuffSendf;
 
 #endif
 
