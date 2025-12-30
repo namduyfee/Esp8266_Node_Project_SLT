@@ -38,13 +38,17 @@ void task_esp_now()
 		if (g_my_esp_now.can_send == true)
 		{
 
-			ret = esp_now_send(g_peer_esp8266.inf_ap.peer_addr, data_esp_now, len_test_data_esp_now);
-			while (ret != ESP_OK)
+			if (g_my_esp_now.can_send == true)
 			{
-				ret = esp_now_send(g_peer_esp8266.inf_ap.peer_addr, data_esp_now, len_test_data_esp_now);
-				vTaskDelay(pdMS_TO_TICKS(10));
+				g_my_esp_now.can_send = false;
+				ret = esp_now_send(g_peer_gateway.inf.sta.peer_addr, data_esp_now, len_test_data_esp_now);
+			
+				if (ret != ESP_OK)
+				{
+					g_my_esp_now.can_send = true;
+				}
+
 			}
-			g_my_esp_now.can_send = false;
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
